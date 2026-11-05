@@ -1,2 +1,0 @@
-# Betty-Kwena
-INTERNET-CAFE -WEBSITE
