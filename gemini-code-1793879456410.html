@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Tech | Internet & Cloud Work Hub</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17.5 19.5H6.5C4.01 19.5 2 17.49 2 15C2 12.75 3.65 10.89 5.86 10.56C6.44 7.39 9.19 5 12.5 5C16.14 5 19.16 7.74 19.48 11.35C21.46 11.77 23 13.52 23 15.63C23 17.77 20.54 19.5 17.5 19.5Z" />
+        </svg>
+        <span>Cloud Tech</span>
+      </a>
+      
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#pricing">Rates</a></li>
+        <li><a href="#calculator">Time Calc</a></li>
+        <li><a href="#contact" class="btn-primary">Find Us</a></li>
+      </ul>
+      
+      <button class="mobile-toggle" id="menuToggle" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <span class="badge">Ultra-Fast Fiber ⚡</span>
+        <h1>High-Speed Browsing, Printing & Cloud Workspace</h1>
+        <p>Gigabit internet, high-performance PCs, low-latency gaming, and instant cloud printing under one roof.</p>
+        <div class="hero-actions">
+          <a href="#calculator" class="btn-primary">Estimate Session Cost</a>
+          <a href="#services" class="btn-secondary">View Services</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="status-indicator">
+          <span class="pulse-dot"></span>
+          <span>Station Status: <strong>Open & Active</strong></span>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num">1 Gbps</span>
+            <span class="stat-lbl">Fiber Speed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">24/7</span>
+            <span class="stat-lbl">Power Backup</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">30+</span>
+            <span class="stat-lbl">Workstations</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>Everything You Need To Get Things Done</h2>
+        <p>Designed for students, freelancers, gamers, and remote professionals.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="card-icon">🚀</div>
+          <h3>Gigabit Stations</h3>
+          <p>Ultra-fast browsing, fast downloads, and Dedicated Fiber lines for seamless tasks.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="card-icon">🖨️</div>
+          <h3>Cloud Print & Scan</h3>
+          <p>Send documents straight from your smartphone or USB for instant high-quality prints.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="card-icon">🎮</div>
+          <h3>Gaming Zone</h3>
+          <p>High-refresh-rate displays, low latency, and pre-installed esports titles.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="card-icon">☕</div>
+          <h3>Coffee & Lounge</h3>
+          <p>Freshly brewed espresso and snacks to power your study or work sprints.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Cost Estimator -->
+  <section class="calculator-section" id="calculator">
+    <div class="container">
+      <div class="calc-box">
+        <div class="calc-header">
+          <h2>Interactive Session Calculator</h2>
+          <p>Select your station type and estimated time to see pricing instantly.</p>
+        </div>
+
+        <form id="sessionCalcForm" class="calc-form">
+          <div class="form-group">
+            <label for="stationType">Station Type</label>
+            <select id="stationType">
+              <option value="15">Standard Workstation ($15 / hr)</option>
+              <option value="25">Pro Workstation ($25 / hr)</option>
+              <option value="35">VIP Gaming Hub ($35 / hr)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="hoursInput">Duration (Hours): <span id="hoursVal">2</span> hrs</label>
+            <input type="range" id="hoursInput" min="0.5" max="8" step="0.5" value="2" />
+          </div>
+
+          <div class="calc-result">
+            <span>Estimated Total:</span>
+            <div class="price-display" id="totalPrice">$30.00</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Rates Table -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <h2>Transparent Station Pricing</h2>
+        <p>No hidden fees. Pay for what you use by the minute or hour.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Basic Station</h3>
+          <div class="price">$15<span>/hr</span></div>
+          <ul>
+            <li>High-Speed Web Browsing</li>
+            <li>Office Suite Access</li>
+            <li>USB & Cloud Access</li>
+            <li>Standard Audio Headset</li>
+          </ul>
+        </div>
+
+        <div class="price-card featured">
+          <div class="popular-tag">Most Popular</div>
+          <h3>Pro Station</h3>
+          <div class="price">$25<span>/hr</span></div>
+          <ul>
+            <li>Dual Monitor Setup</li>
+            <li>Adobe Creative Apps</li>
+            <li>High-Speed Uploads</li>
+            <li>Free Filtered Water</li>
+          </ul>
+        </div>
+
+        <div class="price-card">
+          <h3>Gaming Rig</h3>
+          <div class="price">$35<span>/hr</span></div>
+          <ul>
+            <li>RTX Graphics & 240Hz Screens</li>
+            <li>Mechanical Keyboards</li>
+            <li>Pre-loaded Esports Titles</li>
+            <li>Noise-Canceling Headset</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Footer -->
+  <footer class="footer" id="contact">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <a href="#" class="logo light">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17.5 19.5H6.5C4.01 19.5 2 17.49 2 15C2 12.75 3.65 10.89 5.86 10.56C6.44 7.39 9.19 5 12.5 5C16.14 5 19.16 7.74 19.48 11.35C21.46 11.77 23 13.52 23 15.63C23 17.77 20.54 19.5 17.5 19.5Z" />
+          </svg>
+          <span>Cloud Tech</span>
+        </a>
+        <p>Your high-speed hub for work, study, and play.</p>
+      </div>
+
+      <div class="footer-details">
+        <div>
+          <h4>Location</h4>
+          <p>104 Tech Boulevard, Suite A<br>Downtown District</p>
+        </div>
+        <div>
+          <h4>Hours</h4>
+          <p>Mon - Sat: 07:00 - 22:00<br>Sun: 09:00 - 18:00</p>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>info@cloudtech.com<br>+1 (555) 019-2834</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Cloud Tech Internet Cafe. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
