@@ -150,6 +150,28 @@ footer li a:hover{color:var(--red)}
 }
 @media (max-width:480px){.quick .grid{grid-template-columns:1fr}.quick a{border-right:0!important;border-bottom:1px solid var(--line)}.fcols{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* dashboard */
+.dash h2{font-size:22px;letter-spacing:-.5px}
+.dash .sub{color:var(--muted);font-size:14px;margin:4px 0 18px}
+.dash .bal{font-size:38px;font-weight:800;letter-spacing:-1.4px;margin-bottom:14px}
+.dash ul{list-style:none;margin-bottom:18px}
+.dash li{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.dash li .in{color:#0a7a3d}
+.dash .btn{width:100%}
+.dash[hidden],.login[hidden]{display:none}
+
+/* apply dialog */
+dialog{border:0;border-radius:20px;padding:32px;width:min(460px,92vw);margin:auto;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(29,29,36,.6)}
+dialog h2{font-size:24px;letter-spacing:-.6px}
+dialog .sub{color:var(--muted);font-size:14px;margin:4px 0 20px}
+dialog select{width:100%;padding:13px 14px;border:1.5px solid #cfcac4;border-radius:10px;background:#fff;font:inherit}
+dialog select:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(220,0,50,.18)}
+dialog .row2{display:flex;gap:12px;margin-top:8px}
+dialog .row2 .btn{flex:1}
+dialog .ref{font-size:30px;font-weight:800;color:var(--red);letter-spacing:1px;margin:10px 0 18px}
+.fine#total{margin-top:10px}
 </style>
 </head>
 <body>
@@ -176,7 +198,7 @@ footer li a:hover{color:var(--red)}
       <a href="#calc">Calculators</a>
     </nav>
     <a class="btn ghost" href="#login">Log in</a>
-    <a class="btn" href="#cta">Open an account</a>
+    <button type="button" class="btn" data-open>Open an account</button>
   </div>
 </header>
 
@@ -187,19 +209,25 @@ footer li a:hover{color:var(--red)}
       <h1>Money that moves at your pace.</h1>
       <p>Open an account on your phone in minutes, pay anyone instantly and keep your savings working, all in one place.</p>
       <div class="actions">
-        <a class="btn light" href="#cta">Open an account</a>
+        <button type="button" class="btn light" data-open>Open an account</button>
         <a class="btn ghost" style="color:#fff;border-color:#fff" href="#app">Get the app</a>
       </div>
     </div>
     <form class="login" id="login" novalidate>
       <h2>Log in to Internet Banking</h2>
-      <p class="sub">Use your account number and PIN.</p>
-      <div class="field"><label for="acc">Account or card number</label><input id="acc" inputmode="numeric" autocomplete="username" placeholder="e.g. 4071 2233 8890"></div>
+      <p class="sub">Demo login: account 4000000001, PIN 12345.</p>
+      <div class="field"><label for="acc">Account or card number</label><input id="acc" inputmode="numeric" autocomplete="username" placeholder="Demo: 4000000001"></div>
       <div class="field"><label for="pin">PIN</label><input id="pin" type="password" inputmode="numeric" maxlength="5" autocomplete="current-password"></div>
       <button class="btn" type="submit">Log in</button>
       <div class="msg" id="msg" role="alert"></div>
       <div class="links"><a href="#">Forgot PIN?</a><a href="#">Register</a></div>
     </form>
+<section class="login dash" id="dash" hidden aria-live="polite" style="padding:30px">
+  <h2 id="dName"></h2><p class="sub" id="dType"></p>
+  <div class="bal" id="dBal"></div>
+  <ul id="dTx"></ul>
+  <button class="btn ghost" id="logout" type="button">Log out</button>
+</section>
   </div>
 </div>
 
@@ -239,7 +267,8 @@ footer li a:hover{color:var(--red)}
       <div class="row"><div><label for="amt">Loan amount</label><output id="amtO"></output></div><input id="amt" type="range" min="10000" max="500000" step="5000" value="120000"></div>
       <div class="row"><div><label for="term">Term</label><output id="termO"></output></div><input id="term" type="range" min="12" max="84" step="6" value="60"></div>
       <div class="row"><div><label for="rate">Interest rate (p.a.)</label><output id="rateO"></output></div><input id="rate" type="range" min="8" max="26" step="0.25" value="14.5"></div>
-      <div class="result"><div><small>Estimated monthly repayment</small><b id="pay"></b></div></div>
+      <div class="result"><div><small>Estimated monthly repayment</small><b id="pay">R 0.00</b></div></div>
+      <p class="fine" id="total"></p>
       <p class="fine">Illustrative only. Your actual rate and repayment depend on a credit assessment.</p>
     </div>
   </div>
@@ -275,7 +304,7 @@ footer li a:hover{color:var(--red)}
   <div class="wrap">
     <h2>Ready to bank with us?</h2>
     <p>You only need your South African ID and your phone. Most accounts are open the same day.</p>
-    <a class="btn" href="#">Open an account</a>
+    <button type="button" class="btn" data-open>Open an account</button>
   </div>
 </div>
 </main>
@@ -288,28 +317,232 @@ footer li a:hover{color:var(--red)}
       <div><h4>Support</h4><ul><li><a href="#">Contact us</a></li><li><a href="#">Find a branch or ATM</a></li><li><a href="#">Fees and pricing</a></li><li><a href="#">Report fraud</a></li></ul></div>
       <div><h4>About</h4><ul><li><a href="#">Careers</a></li><li><a href="#">Media</a></li><li><a href="#">Privacy notice</a></li><li><a href="#">Terms of use</a></li></ul></div>
     </div>
-    <p class="legal">Demo landing page for design purposes. Not an official Absa website. Never share your PIN, password or OTP with anyone, including bank staff.</p>
+    <p class="legal">Demo full-stack project for design purposes. Not an official Absa website. Never share your PIN, password or OTP with anyone, including bank staff.</p>
   </div>
 </footer>
 
-<script>
-const $=id=>document.getElementById(id);
-const menuBtn=$('menuBtn'),nav=$('nav');
-menuBtn.addEventListener('click',()=>{const o=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o)});
+<dialog id="apply" aria-labelledby="aTitle">
+  <form id="applyForm" novalidate>
+    <h2 id="aTitle">Open an account</h2>
+    <p class="sub">You will need your South African ID. We will contact you to finish.</p>
+    <div class="field"><label for="fullName">Full name</label><input id="fullName" name="fullName" autocomplete="name" required></div>
+    <div class="field"><label for="idNumber">ID number</label><input id="idNumber" name="idNumber" inputmode="numeric" maxlength="13" required></div>
+    <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+    <div class="field"><label for="phone">Cellphone</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="082 123 4567" required></div>
+    <div class="field"><label for="product">Product</label><select id="product" name="product"><option>Everyday account</option><option>Savings account</option><option>Credit card</option><option>Home loan</option><option>Business account</option></select></div>
+    <div class="msg" id="aMsg" role="alert"></div>
+    <div class="row2"><button class="btn ghost" type="button" id="closeApply">Cancel</button><button class="btn" type="submit">Submit application</button></div>
+  </form>
+  <div id="done" hidden>
+    <h2>Application received</h2>
+    <p class="sub">Keep this reference. A consultant will call you within one working day.</p>
+    <div class="ref" id="ref"></div>
+    <button class="btn" type="button" id="closeDone" style="width:100%">Done</button>
+  </div>
+</dialog>
 
-$('login').addEventListener('submit',e=>{
-  e.preventDefault();
-  const a=$('acc').value.replace(/\s/g,''),p=$('pin').value;
-  $('msg').textContent=(a.length<8||!/^\d{5}$/.test(p))?'Enter your account number and a 5-digit PIN.':'Demo only: connect this form to your login service.';
+
+<script>
+const $ = id => document.getElementById(id);
+const R = n => 'R ' + Number(n).toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/,/g, ' ');
+
+async function remote(url, body) {
+  const res = await fetch(url, {
+    method: body ? 'POST' : 'GET',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'same-origin',
+    body: body ? JSON.stringify(body) : undefined
+  });
+  const data = await res.json().catch(() => ({}));
+  if (res.status === 404 && !data.error) { const e = new Error('No backend'); e.noBackend = true; throw e; }
+  if (!res.ok) throw new Error(data.error || 'Something went wrong. Try again.');
+  return data;
+}
+
+/* Uses the Node server's /api when it is running; otherwise falls back to the demo backend below. */
+let backend = true;
+async function api(url, body) {
+  if (backend) {
+    try { return await remote(url, body); }
+    catch (e) { if (!(e instanceof TypeError) && !e.noBackend) throw e; backend = false; }
+  }
+  return local(url, body);
+}
+
+/* ---- Built-in demo backend (works when this file is opened directly) ---- */
+const DEMO = {
+  account: '4000000001', pin: '12345', name: 'Thandi Mokoena', type: 'Cheque account', balance: 12480.55,
+  transactions: [
+    { date: '2026-11-24', label: 'Pick n Pay', amount: -342.10 },
+    { date: '2026-11-23', label: 'Salary', amount: 18900.00 },
+    { date: '2026-11-22', label: 'Eskom prepaid', amount: -500.00 },
+    { date: '2026-11-21', label: 'Uber', amount: -96.40 },
+    { date: '2026-11-20', label: 'Savings transfer', amount: -1000.00 }
+  ]
+};
+let signedIn = false;
+try { signedIn = sessionStorage.getItem('absa_demo') === '1'; } catch {}
+function setSigned(v) {
+  signedIn = v;
+  try { v ? sessionStorage.setItem('absa_demo', '1') : sessionStorage.removeItem('absa_demo'); } catch {}
+}
+function validId(id) {
+  if (!/^\d{13}$/.test(id)) return false;
+  const mm = +id.slice(2, 4), dd = +id.slice(4, 6);
+  if (mm < 1 || mm > 12 || dd < 1 || dd > 31) return false;
+  let sum = 0;
+  for (let i = 0; i < 13; i++) {
+    let d = +id[12 - i];
+    if (i % 2) { d *= 2; if (d > 9) d -= 9; }
+    sum += d;
+  }
+  return sum % 10 === 0;
+}
+async function local(url, b = {}) {
+  if (url === '/api/login') {
+    const acc = String(b.account || '').replace(/\D/g, '');
+    if (acc !== DEMO.account || String(b.pin || '') !== DEMO.pin) throw new Error('Account number or PIN is incorrect.');
+    setSigned(true);
+    return { ok: true };
+  }
+  if (url === '/api/logout') { setSigned(false); return { ok: true }; }
+  if (url === '/api/me') {
+    if (!signedIn) throw new Error('Please log in again.');
+    const { name, account, type, balance, transactions } = DEMO;
+    return { name, account, type, balance, transactions };
+  }
+  if (url === '/api/loan/quote') {
+    const P = Number(b.amount), n = Number(b.term), apr = Number(b.rate);
+    if (!(P >= 10000 && P <= 500000) || !(n >= 12 && n <= 84) || !(apr >= 8 && apr <= 26)) throw new Error('Loan values are out of range.');
+    const r = apr / 100 / 12;
+    const payment = P * r / (1 - Math.pow(1 + r, -n));
+    return { payment, total: payment * n, interest: payment * n - P };
+  }
+  if (url === '/api/applications') {
+    const name = String(b.fullName || '').trim();
+    const id = String(b.idNumber || '').replace(/\s/g, '');
+    const email = String(b.email || '').trim();
+    const phone = String(b.phone || '').replace(/[\s-]/g, '');
+    const product = String(b.product || '');
+    if (name.length < 3) throw new Error('Enter your full name.');
+    if (!validId(id)) throw new Error('Enter a valid 13-digit South African ID number.');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) throw new Error('Enter a valid email address.');
+    if (!/^(\+27|0)\d{9}$/.test(phone)) throw new Error('Enter a valid South African cellphone number.');
+    if (!['Everyday account', 'Savings account', 'Credit card', 'Home loan', 'Business account'].includes(product)) throw new Error('Choose a product.');
+    const reference = 'ABS-' + Array.from(crypto.getRandomValues(new Uint8Array(4)), x => x.toString(16).padStart(2, '0')).join('').toUpperCase();
+    try {
+      const all = JSON.parse(localStorage.getItem('absa_apps') || '[]');
+      all.push({ reference, name, idLast4: id.slice(-4), email, phone, product, createdAt: new Date().toISOString() });
+      localStorage.setItem('absa_apps', JSON.stringify(all));
+    } catch {}
+    return { reference };
+  }
+  throw new Error('Not found.');
+}
+
+/* mobile menu */
+const menuBtn = $('menuBtn'), nav = $('nav');
+menuBtn.addEventListener('click', () => {
+  menuBtn.setAttribute('aria-expanded', nav.classList.toggle('open'));
 });
 
-const R=n=>'R '+Math.round(n).toLocaleString('en-ZA').replace(/,/g,' ');
-function calc(){
-  const P=+$('amt').value,n=+$('term').value,r=+$('rate').value/100/12;
-  $('amtO').textContent=R(P);$('termO').textContent=n+' months';$('rateO').textContent=$('rate').value+'%';
-  $('pay').textContent=R(P*r/(1-Math.pow(1+r,-n)));
+/* login + dashboard */
+const loginForm = $('login'), dash = $('dash');
+
+async function showDashboard() {
+  const me = await api('/api/me');
+  $('dName').textContent = 'Hi, ' + me.name.split(' ')[0];
+  $('dType').textContent = me.type + ' · ' + me.account;
+  $('dBal').textContent = R(me.balance);
+  const list = $('dTx');
+  list.replaceChildren(...me.transactions.map(t => {
+    const li = document.createElement('li');
+    const a = document.createElement('span'); a.textContent = t.label;
+    const b = document.createElement('b'); b.textContent = (t.amount > 0 ? '+' : '-') + R(Math.abs(t.amount));
+    if (t.amount > 0) b.className = 'in';
+    li.append(a, b);
+    return li;
+  }));
+  loginForm.hidden = true;
+  dash.hidden = false;
 }
-['amt','term','rate'].forEach(i=>$(i).addEventListener('input',calc));calc();
+
+loginForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  const msg = $('msg');
+  msg.textContent = '';
+  try {
+    await api('/api/login', { account: $('acc').value, pin: $('pin').value });
+    $('pin').value = '';
+    await showDashboard();
+  } catch (err) {
+    msg.textContent = err.message;
+  }
+});
+
+$('logout').addEventListener('click', async () => {
+  await api('/api/logout', {});
+  dash.hidden = true;
+  loginForm.hidden = false;
+  $('acc').focus();
+});
+
+api('/api/me').then(showDashboard).catch(() => {});
+
+/* loan calculator (calculated by the server) */
+let timer;
+function updateLabels() {
+  $('amtO').textContent = R($('amt').value).replace('.00', '');
+  $('termO').textContent = $('term').value + ' months';
+  $('rateO').textContent = $('rate').value + '%';
+}
+async function quote() {
+  updateLabels();
+  try {
+    const q = await api('/api/loan/quote', { amount: +$('amt').value, term: +$('term').value, rate: +$('rate').value });
+    $('pay').textContent = R(q.payment);
+    $('total').textContent = 'Total repaid ' + R(q.total) + ', of which interest ' + R(q.interest);
+  } catch (err) {
+    $('pay').textContent = '–';
+    $('total').textContent = err.message;
+  }
+}
+['amt', 'term', 'rate'].forEach(id => $(id).addEventListener('input', () => {
+  updateLabels();
+  clearTimeout(timer);
+  timer = setTimeout(quote, 150);
+}));
+quote();
+
+/* open an account */
+const dlg = $('apply'), form = $('applyForm'), aMsg = $('aMsg');
+document.querySelectorAll('[data-open]').forEach(b => b.addEventListener('click', () => {
+  form.hidden = false;
+  $('done').hidden = true;
+  aMsg.textContent = '';
+  dlg.showModal();
+}));
+$('closeApply').addEventListener('click', () => dlg.close());
+$('closeDone').addEventListener('click', () => dlg.close());
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  aMsg.textContent = '';
+  const btn = form.querySelector('button[type=submit]');
+  btn.disabled = true;
+  try {
+    const body = Object.fromEntries(new FormData(form));
+    const { reference } = await api('/api/applications', body);
+    $('ref').textContent = reference;
+    form.reset();
+    form.hidden = true;
+    $('done').hidden = false;
+  } catch (err) {
+    aMsg.textContent = err.message;
+  } finally {
+    btn.disabled = false;
+  }
+});
 </script>
 </body>
 </html>
